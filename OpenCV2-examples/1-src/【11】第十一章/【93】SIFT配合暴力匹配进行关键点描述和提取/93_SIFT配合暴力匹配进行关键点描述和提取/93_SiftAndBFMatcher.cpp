@@ -1,17 +1,17 @@
-//--------------------------------------¡¾³ÌĞòËµÃ÷¡¿-------------------------------------------
-//		³ÌĞòËµÃ÷£º¡¶OpenCV3±à³ÌÈëÃÅ¡·OpenCV2°æÊé±¾ÅäÌ×Ê¾Àı³ÌĞò93
-//		³ÌĞòÃèÊö£ºSIFTÅäºÏ±©Á¦Æ¥Åä½øĞĞ¹Ø¼üµãÃèÊöºÍÌáÈ¡
-//		¿ª·¢²âÊÔËùÓÃ²Ù×÷ÏµÍ³£º Windows 7 64bit
-//		¿ª·¢²âÊÔËùÓÃIDE°æ±¾£ºVisual Studio 2010
-//		¿ª·¢²âÊÔËùÓÃOpenCV°æ±¾£º	2.4.9
-//		2014Äê06ÔÂ Created by @Ç³Ä«_Ã«ĞÇÔÆ
-//		2014Äê11ÔÂ Revised by @Ç³Ä«_Ã«ĞÇÔÆ
+//--------------------------------------ã€ç¨‹åºè¯´æ˜ã€‘-------------------------------------------
+//		ç¨‹åºè¯´æ˜ï¼šã€ŠOpenCV3ç¼–ç¨‹å…¥é—¨ã€‹OpenCV2ç‰ˆä¹¦æœ¬é…å¥—ç¤ºä¾‹ç¨‹åº93
+//		ç¨‹åºæè¿°ï¼šSIFTé…åˆæš´åŠ›åŒ¹é…è¿›è¡Œå…³é”®ç‚¹æè¿°å’Œæå–
+//		å¼€å‘æµ‹è¯•æ‰€ç”¨æ“ä½œç³»ç»Ÿï¼š Windows 7 64bit
+//		å¼€å‘æµ‹è¯•æ‰€ç”¨IDEç‰ˆæœ¬ï¼šVisual Studio 2010
+//		å¼€å‘æµ‹è¯•æ‰€ç”¨OpenCVç‰ˆæœ¬ï¼š	2.4.9
+//		2014å¹´06æœˆ Created by @æµ…å¢¨_æ¯›æ˜Ÿäº‘
+//		2014å¹´11æœˆ Revised by @æµ…å¢¨_æ¯›æ˜Ÿäº‘
 //------------------------------------------------------------------------------------------------
 
 
 
-//---------------------------------¡¾Í·ÎÄ¼ş¡¢ÃüÃû¿Õ¼ä°üº¬²¿·Ö¡¿----------------------------
-//		ÃèÊö£º°üº¬³ÌĞòËùÊ¹ÓÃµÄÍ·ÎÄ¼şºÍÃüÃû¿Õ¼ä
+//---------------------------------ã€å¤´æ–‡ä»¶ã€å‘½åç©ºé—´åŒ…å«éƒ¨åˆ†ã€‘----------------------------
+//		æè¿°ï¼šåŒ…å«ç¨‹åºæ‰€ä½¿ç”¨çš„å¤´æ–‡ä»¶å’Œå‘½åç©ºé—´
 //------------------------------------------------------------------------------------------------
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -22,35 +22,35 @@ using namespace std;
 
 
 
-//-----------------------------------¡¾ShowHelpText( )º¯Êı¡¿-----------------------------
-//		 ÃèÊö£ºÊä³öÒ»Ğ©°ïÖúĞÅÏ¢
+//-----------------------------------ã€ShowHelpText( )å‡½æ•°ã€‘-----------------------------
+//		 æè¿°ï¼šè¾“å‡ºä¸€äº›å¸®åŠ©ä¿¡æ¯
 //----------------------------------------------------------------------------------------------
 void ShowHelpText()
 {
-	//Êä³ö»¶Ó­ĞÅÏ¢ºÍOpenCV°æ±¾
-	printf("\n\n\t\t\t·Ç³£¸ĞĞ»¹ºÂò¡¶OpenCV3±à³ÌÈëÃÅ¡·Ò»Êé£¡\n");
-	printf("\n\n\t\t\t´ËÎª±¾ÊéOpenCV2°æµÄµÚ93¸öÅäÌ×Ê¾Àı³ÌĞò\n");
-	printf("\n\n\t\t\t   µ±Ç°Ê¹ÓÃµÄOpenCV°æ±¾Îª£º" CV_VERSION );
+	//è¾“å‡ºæ¬¢è¿ä¿¡æ¯å’ŒOpenCVç‰ˆæœ¬
+	printf("\n\n\t\t\téå¸¸æ„Ÿè°¢è´­ä¹°ã€ŠOpenCV3ç¼–ç¨‹å…¥é—¨ã€‹ä¸€ä¹¦ï¼\n");
+	printf("\n\n\t\t\tæ­¤ä¸ºæœ¬ä¹¦OpenCV2ç‰ˆçš„ç¬¬93ä¸ªé…å¥—ç¤ºä¾‹ç¨‹åº\n");
+	printf("\n\n\t\t\t   å½“å‰ä½¿ç”¨çš„OpenCVç‰ˆæœ¬ä¸ºï¼š" CV_VERSION );
 	printf("\n\n  ----------------------------------------------------------------------------\n\n\n");
 }
 
 
-//--------------------------------------¡¾main( )º¯Êı¡¿-----------------------------------------
-//          ÃèÊö£º¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úº¯Êı£¬ÎÒÃÇµÄ³ÌĞò´ÓÕâÀï¿ªÊ¼Ö´ĞĞ
+//--------------------------------------ã€main( )å‡½æ•°ã€‘-----------------------------------------
+//          æè¿°ï¼šæ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£å‡½æ•°ï¼Œæˆ‘ä»¬çš„ç¨‹åºä»è¿™é‡Œå¼€å§‹æ‰§è¡Œ
 //-----------------------------------------------------------------------------------------------
 int main()
 {
-	//¡¾0¡¿¸Ä±äconsole×ÖÌåÑÕÉ«
+	//ã€0ã€‘æ”¹å˜consoleå­—ä½“é¢œè‰²
 	system("color 5F"); 
 
 	ShowHelpText();
 
-	//¡¾1¡¿ÔØÈëÍ¼Ïñ¡¢ÏÔÊ¾²¢×ª»¯Îª»Ò¶ÈÍ¼
+	//ã€1ã€‘è½½å…¥å›¾åƒã€æ˜¾ç¤ºå¹¶è½¬åŒ–ä¸ºç°åº¦å›¾
 	Mat trainImage = imread("1.jpg"), trainImage_gray;
-	imshow("Ô­Ê¼Í¼",trainImage);
+	imshow("åŸå§‹å›¾",trainImage);
 	cvtColor(trainImage, trainImage_gray, CV_BGR2GRAY);
 
-	//¡¾2¡¿¼ì²âSIFT¹Ø¼üµã¡¢ÌáÈ¡ÑµÁ·Í¼ÏñÃèÊö·û
+	//ã€2ã€‘æ£€æµ‹SIFTå…³é”®ç‚¹ã€æå–è®­ç»ƒå›¾åƒæè¿°ç¬¦
 	vector<KeyPoint> train_keyPoint;
 	Mat trainDescription;
 	SiftFeatureDetector featureDetector;
@@ -58,40 +58,40 @@ int main()
 	SiftDescriptorExtractor featureExtractor;
 	featureExtractor.compute(trainImage_gray, train_keyPoint, trainDescription);
 
-	// ¡¾3¡¿½øĞĞ»ùÓÚÃèÊö·ûµÄ±©Á¦Æ¥Åä
+	// ã€3ã€‘è¿›è¡ŒåŸºäºæè¿°ç¬¦çš„æš´åŠ›åŒ¹é…
 	BFMatcher matcher;
 	vector<Mat> train_desc_collection(1, trainDescription);
 	matcher.add(train_desc_collection);
 	matcher.train();
 
-	//¡¾4¡¿´´½¨ÊÓÆµ¶ÔÏó¡¢¶¨ÒåÖ¡ÂÊ
+	//ã€4ã€‘åˆ›å»ºè§†é¢‘å¯¹è±¡ã€å®šä¹‰å¸§ç‡
 	VideoCapture cap(0);
-	unsigned int frameCount = 0;//Ö¡Êı
+	unsigned int frameCount = 0;//å¸§æ•°
 
-	//¡¾5¡¿²»¶ÏÑ­»·£¬Ö±µ½q¼ü±»°´ÏÂ
+	//ã€5ã€‘ä¸æ–­å¾ªç¯ï¼Œç›´åˆ°qé”®è¢«æŒ‰ä¸‹
 	while(char(waitKey(1)) != 'q')
 	{
-		//<1>²ÎÊıÉèÖÃ
-		double time0 = static_cast<double>(getTickCount( ));//¼ÇÂ¼ÆğÊ¼Ê±¼ä
+		//<1>å‚æ•°è®¾ç½®
+		double time0 = static_cast<double>(getTickCount( ));//è®°å½•èµ·å§‹æ—¶é—´
 		Mat captureImage, captureImage_gray;
-		cap >> captureImage;//²É¼¯ÊÓÆµµ½testImageÖĞ
+		cap >> captureImage;//é‡‡é›†è§†é¢‘åˆ°testImageä¸­
 		if(captureImage.empty())
 			continue;
 
-		//<2>×ª»¯Í¼Ïñµ½»Ò¶È
+		//<2>è½¬åŒ–å›¾åƒåˆ°ç°åº¦
 		cvtColor(captureImage, captureImage_gray, CV_BGR2GRAY);
 
-		//<3>¼ì²âSURF¹Ø¼üµã¡¢ÌáÈ¡²âÊÔÍ¼ÏñÃèÊö·û
+		//<3>æ£€æµ‹SURFå…³é”®ç‚¹ã€æå–æµ‹è¯•å›¾åƒæè¿°ç¬¦
 		vector<KeyPoint> test_keyPoint;
 		Mat testDescriptor;
 		featureDetector.detect(captureImage_gray, test_keyPoint);
 		featureExtractor.compute(captureImage_gray, test_keyPoint, testDescriptor);
 
-		//<4>Æ¥ÅäÑµÁ·ºÍ²âÊÔÃèÊö·û
+		//<4>åŒ¹é…è®­ç»ƒå’Œæµ‹è¯•æè¿°ç¬¦
 		vector<vector<DMatch> > matches;
 		matcher.knnMatch(testDescriptor, matches, 2);
 
-		// <5>¸ù¾İÀÍÊÏËã·¨£¨Lowe's algorithm£©£¬µÃµ½ÓÅĞãµÄÆ¥Åäµã
+		// <5>æ ¹æ®åŠ³æ°ç®—æ³•ï¼ˆLowe's algorithmï¼‰ï¼Œå¾—åˆ°ä¼˜ç§€çš„åŒ¹é…ç‚¹
 		vector<DMatch> goodMatches;
 		for(unsigned int i = 0; i < matches.size(); i++)
 		{
@@ -99,13 +99,13 @@ int main()
 				goodMatches.push_back(matches[i][0]);
 		}
 
-		//<6>»æÖÆÆ¥Åäµã²¢ÏÔÊ¾´°¿Ú
+		//<6>ç»˜åˆ¶åŒ¹é…ç‚¹å¹¶æ˜¾ç¤ºçª—å£
 		Mat dstImage;
 		drawMatches(captureImage, test_keyPoint, trainImage, train_keyPoint, goodMatches, dstImage);
-		imshow("Æ¥Åä´°¿Ú", dstImage);
+		imshow("åŒ¹é…çª—å£", dstImage);
 
-		//<7>Êä³öÖ¡ÂÊĞÅÏ¢
-		cout << "\t>µ±Ç°Ö¡ÂÊÎª£º" << getTickFrequency() / (getTickCount() - time0) << endl;
+		//<7>è¾“å‡ºå¸§ç‡ä¿¡æ¯
+		cout << "\t>å½“å‰å¸§ç‡ä¸ºï¼š" << getTickFrequency() / (getTickCount() - time0) << endl;
 	}
 
 	return 0;

@@ -1,17 +1,17 @@
-//--------------------------------------¡¾³ÌÐòËµÃ÷¡¿-------------------------------------------
-//		³ÌÐòËµÃ÷£º¡¶OpenCV3±à³ÌÈëÃÅ¡·OpenCV3°æÊé±¾ÅäÌ×Ê¾Àý³ÌÐò77
-//		³ÌÐòÃèÊö£º·ÖË®ÁëËã·¨×ÛºÏÊ¾Àý
-//		¿ª·¢²âÊÔËùÓÃ²Ù×÷ÏµÍ³£º Windows 7 64bit
-//		¿ª·¢²âÊÔËùÓÃIDE°æ±¾£ºVisual Studio 2010
-//		¿ª·¢²âÊÔËùÓÃOpenCV°æ±¾£º	3.0 beta
-//		2014Äê11ÔÂ Created by @Ç³Ä«_Ã«ÐÇÔÆ
-//		2014Äê12ÔÂ Revised by @Ç³Ä«_Ã«ÐÇÔÆ
+//--------------------------------------ã€ç¨‹åºè¯´æ˜Žã€‘-------------------------------------------
+//		ç¨‹åºè¯´æ˜Žï¼šã€ŠOpenCV3ç¼–ç¨‹å…¥é—¨ã€‹OpenCV3ç‰ˆä¹¦æœ¬é…å¥—ç¤ºä¾‹ç¨‹åº77
+//		ç¨‹åºæè¿°ï¼šåˆ†æ°´å²­ç®—æ³•ç»¼åˆç¤ºä¾‹
+//		å¼€å‘æµ‹è¯•æ‰€ç”¨æ“ä½œç³»ç»Ÿï¼š Windows 7 64bit
+//		å¼€å‘æµ‹è¯•æ‰€ç”¨IDEç‰ˆæœ¬ï¼šVisual Studio 2010
+//		å¼€å‘æµ‹è¯•æ‰€ç”¨OpenCVç‰ˆæœ¬ï¼š	3.0 beta
+//		2014å¹´11æœˆ Created by @æµ…å¢¨_æ¯›æ˜Ÿäº‘
+//		2014å¹´12æœˆ Revised by @æµ…å¢¨_æ¯›æ˜Ÿäº‘
 //------------------------------------------------------------------------------------------------
 
 
 
-//---------------------------------¡¾Í·ÎÄ¼þ¡¢ÃüÃû¿Õ¼ä°üº¬²¿·Ö¡¿----------------------------
-//		ÃèÊö£º°üº¬³ÌÐòËùÊ¹ÓÃµÄÍ·ÎÄ¼þºÍÃüÃû¿Õ¼ä
+//---------------------------------ã€å¤´æ–‡ä»¶ã€å‘½åç©ºé—´åŒ…å«éƒ¨åˆ†ã€‘----------------------------
+//		æè¿°ï¼šåŒ…å«ç¨‹åºæ‰€ä½¿ç”¨çš„å¤´æ–‡ä»¶å’Œå‘½åç©ºé—´
 //------------------------------------------------------------------------------------------------
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -19,37 +19,37 @@
 using namespace cv;
 using namespace std;
 
-//-----------------------------------¡¾ºê¶¨Òå²¿·Ö¡¿-------------------------------------------- 
-//  ÃèÊö£º¶¨ÒåÒ»Ð©¸¨Öúºê 
+//-----------------------------------ã€å®å®šä¹‰éƒ¨åˆ†ã€‘-------------------------------------------- 
+//  æè¿°ï¼šå®šä¹‰ä¸€äº›è¾…åŠ©å® 
 //------------------------------------------------------------------------------------------------ 
-#define WINDOW_NAME1 "¡¾³ÌÐò´°¿Ú1¡¿"        //Îª´°¿Ú±êÌâ¶¨ÒåµÄºê 
-#define WINDOW_NAME2 "¡¾·ÖË®ÁëËã·¨Ð§¹ûÍ¼¡¿"        //Îª´°¿Ú±êÌâ¶¨ÒåµÄºê
+#define WINDOW_NAME1 "ã€ç¨‹åºçª—å£1ã€‘"        //ä¸ºçª—å£æ ‡é¢˜å®šä¹‰çš„å® 
+#define WINDOW_NAME2 "ã€åˆ†æ°´å²­ç®—æ³•æ•ˆæžœå›¾ã€‘"        //ä¸ºçª—å£æ ‡é¢˜å®šä¹‰çš„å®
 
-//-----------------------------------¡¾È«¾Öº¯±äÁ¿ÉùÃ÷²¿·Ö¡¿--------------------------------------
-//		ÃèÊö£ºÈ«¾Ö±äÁ¿µÄÉùÃ÷
+//-----------------------------------ã€å…¨å±€å‡½å˜é‡å£°æ˜Žéƒ¨åˆ†ã€‘--------------------------------------
+//		æè¿°ï¼šå…¨å±€å˜é‡çš„å£°æ˜Ž
 //-----------------------------------------------------------------------------------------------
 Mat g_maskImage, g_srcImage;
 Point prevPt(-1, -1);
 
-//-----------------------------------¡¾È«¾Öº¯ÊýÉùÃ÷²¿·Ö¡¿--------------------------------------
-//		ÃèÊö£ºÈ«¾Öº¯ÊýµÄÉùÃ÷
+//-----------------------------------ã€å…¨å±€å‡½æ•°å£°æ˜Žéƒ¨åˆ†ã€‘--------------------------------------
+//		æè¿°ï¼šå…¨å±€å‡½æ•°çš„å£°æ˜Ž
 //-----------------------------------------------------------------------------------------------
 static void ShowHelpText();
 static void on_Mouse( int event, int x, int y, int flags, void* );
 
 
-//-----------------------------------¡¾main( )º¯Êý¡¿--------------------------------------------
-//		ÃèÊö£º¿ØÖÆÌ¨Ó¦ÓÃ³ÌÐòµÄÈë¿Úº¯Êý£¬ÎÒÃÇµÄ³ÌÐò´ÓÕâÀï¿ªÊ¼Ö´ÐÐ
+//-----------------------------------ã€main( )å‡½æ•°ã€‘--------------------------------------------
+//		æè¿°ï¼šæŽ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£å‡½æ•°ï¼Œæˆ‘ä»¬çš„ç¨‹åºä»Žè¿™é‡Œå¼€å§‹æ‰§è¡Œ
 //-----------------------------------------------------------------------------------------------
 int main( int argc, char** argv )
 {	
-	//¡¾0¡¿¸Ä±äconsole×ÖÌåÑÕÉ«
+	//ã€0ã€‘æ”¹å˜consoleå­—ä½“é¢œè‰²
 	system("color 6F"); 
 
-	//¡¾0¡¿ÏÔÊ¾°ïÖúÎÄ×Ö
+	//ã€0ã€‘æ˜¾ç¤ºå¸®åŠ©æ–‡å­—
 	ShowHelpText( );
 
-	//¡¾1¡¿ÔØÈëÔ­Í¼²¢ÏÔÊ¾£¬³õÊ¼»¯ÑÚÄ¤ºÍ»Ò¶ÈÍ¼
+	//ã€1ã€‘è½½å…¥åŽŸå›¾å¹¶æ˜¾ç¤ºï¼Œåˆå§‹åŒ–æŽ©è†œå’Œç°åº¦å›¾
 	g_srcImage = imread("1.jpg", 1);
 	imshow( WINDOW_NAME1, g_srcImage );
 	Mat srcImage,grayImage;
@@ -58,20 +58,20 @@ int main( int argc, char** argv )
 	cvtColor(g_maskImage, grayImage, COLOR_GRAY2BGR);
 	g_maskImage = Scalar::all(0);
 
-	//¡¾2¡¿ÉèÖÃÊó±ê»Øµ÷º¯Êý
+	//ã€2ã€‘è®¾ç½®é¼ æ ‡å›žè°ƒå‡½æ•°
 	setMouseCallback( WINDOW_NAME1, on_Mouse, 0 );
 
-	//¡¾3¡¿ÂÖÑ¯°´¼ü£¬½øÐÐ´¦Àí
+	//ã€3ã€‘è½®è¯¢æŒ‰é”®ï¼Œè¿›è¡Œå¤„ç†
 	while(1)
 	{
-		//»ñÈ¡¼üÖµ
+		//èŽ·å–é”®å€¼
 		int c = waitKey(0);
 
-		//Èô°´¼ü¼üÖµÎªESCÊ±£¬ÍË³ö
+		//è‹¥æŒ‰é”®é”®å€¼ä¸ºESCæ—¶ï¼Œé€€å‡º
 		if( (char)c == 27 )
 			break;
 
-		//°´¼ü¼üÖµÎª2Ê±£¬»Ö¸´Ô´Í¼
+		//æŒ‰é”®é”®å€¼ä¸º2æ—¶ï¼Œæ¢å¤æºå›¾
 		if( (char)c == '2' )
 		{
 			g_maskImage = Scalar::all(0);
@@ -79,34 +79,34 @@ int main( int argc, char** argv )
 			imshow( "image", g_srcImage );
 		}
 
-		//Èô¼ì²âµ½°´¼üÖµÎª1»òÕß¿Õ¸ñ£¬Ôò½øÐÐ´¦Àí
+		//è‹¥æ£€æµ‹åˆ°æŒ‰é”®å€¼ä¸º1æˆ–è€…ç©ºæ ¼ï¼Œåˆ™è¿›è¡Œå¤„ç†
 		if( (char)c == '1' || (char)c == ' ' )
 		{
-			//¶¨ÒåÒ»Ð©²ÎÊý
+			//å®šä¹‰ä¸€äº›å‚æ•°
 			int i, j, compCount = 0;
 			vector<vector<Point> > contours;
 			vector<Vec4i> hierarchy;
 
-			//Ñ°ÕÒÂÖÀª
+			//å¯»æ‰¾è½®å»“
 			findContours(g_maskImage, contours, hierarchy, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
 
-			//ÂÖÀªÎª¿ÕÊ±µÄ´¦Àí
+			//è½®å»“ä¸ºç©ºæ—¶çš„å¤„ç†
 			if( contours.empty() )
 				continue;
 
-			//¿½±´ÑÚÄ¤
+			//æ‹·è´æŽ©è†œ
 			Mat maskImage(g_maskImage.size(), CV_32S);
 			maskImage = Scalar::all(0);
 
-			//Ñ­»·»æÖÆ³öÂÖÀª
+			//å¾ªçŽ¯ç»˜åˆ¶å‡ºè½®å»“
 			for( int index = 0; index >= 0; index = hierarchy[index][0], compCount++ )
 				drawContours(maskImage, contours, index, Scalar::all(compCount+1), -1, 8, hierarchy, INT_MAX);
 
-			//compCountÎªÁãÊ±µÄ´¦Àí
+			//compCountä¸ºé›¶æ—¶çš„å¤„ç†
 			if( compCount == 0 )
 				continue;
 
-			//Éú³ÉËæ»úÑÕÉ«
+			//ç”Ÿæˆéšæœºé¢œè‰²
 			vector<Vec3b> colorTab;
 			for( i = 0; i < compCount; i++ )
 			{
@@ -117,13 +117,13 @@ int main( int argc, char** argv )
 				colorTab.push_back(Vec3b((uchar)b, (uchar)g, (uchar)r));
 			}
 
-			//¼ÆËã´¦ÀíÊ±¼ä²¢Êä³öµ½´°¿ÚÖÐ
+			//è®¡ç®—å¤„ç†æ—¶é—´å¹¶è¾“å‡ºåˆ°çª—å£ä¸­
 			double dTime = (double)getTickCount();
 			watershed( srcImage, maskImage );
 			dTime = (double)getTickCount() - dTime;
-			printf( "\t´¦ÀíÊ±¼ä = %gms\n", dTime*1000./getTickFrequency() );
+			printf( "\tå¤„ç†æ—¶é—´ = %gms\n", dTime*1000./getTickFrequency() );
 
-			//Ë«²ãÑ­»·£¬½«·ÖË®ÁëÍ¼Ïñ±éÀú´æÈëwatershedImageÖÐ
+			//åŒå±‚å¾ªçŽ¯ï¼Œå°†åˆ†æ°´å²­å›¾åƒéåŽ†å­˜å…¥watershedImageä¸­
 			Mat watershedImage(maskImage.size(), CV_8UC3);
 			for( i = 0; i < maskImage.rows; i++ )
 				for( j = 0; j < maskImage.cols; j++ )
@@ -137,7 +137,7 @@ int main( int argc, char** argv )
 						watershedImage.at<Vec3b>(i,j) = colorTab[index - 1];
 				}
 
-				//»ìºÏ»Ò¶ÈÍ¼ºÍ·ÖË®ÁëÐ§¹ûÍ¼²¢ÏÔÊ¾×îÖÕµÄ´°¿Ú
+				//æ··åˆç°åº¦å›¾å’Œåˆ†æ°´å²­æ•ˆæžœå›¾å¹¶æ˜¾ç¤ºæœ€ç»ˆçš„çª—å£
 				watershedImage = watershedImage*0.5 + grayImage*0.5;
 				imshow( WINDOW_NAME2, watershedImage );
 		}
@@ -147,22 +147,22 @@ int main( int argc, char** argv )
 }
 
 
-//-----------------------------------¡¾onMouse( )º¯Êý¡¿---------------------------------------
-//		ÃèÊö£ºÊó±êÏûÏ¢»Øµ÷º¯Êý
+//-----------------------------------ã€onMouse( )å‡½æ•°ã€‘---------------------------------------
+//		æè¿°ï¼šé¼ æ ‡æ¶ˆæ¯å›žè°ƒå‡½æ•°
 //-----------------------------------------------------------------------------------------------
 static void on_Mouse( int event, int x, int y, int flags, void* )
 {
-	//´¦ÀíÊó±ê²»ÔÚ´°¿ÚÖÐµÄÇé¿ö
+	//å¤„ç†é¼ æ ‡ä¸åœ¨çª—å£ä¸­çš„æƒ…å†µ
 	if( x < 0 || x >= g_srcImage.cols || y < 0 || y >= g_srcImage.rows )
 		return;
 
-	//´¦ÀíÊó±ê×ó¼üÏà¹ØÏûÏ¢
+	//å¤„ç†é¼ æ ‡å·¦é”®ç›¸å…³æ¶ˆæ¯
 	if( event == EVENT_LBUTTONUP || !(flags & EVENT_FLAG_LBUTTON) )
 		prevPt = Point(-1,-1);
 	else if( event == EVENT_LBUTTONDOWN )
 		prevPt = Point(x,y);
 
-	//Êó±ê×ó¼ü°´ÏÂ²¢ÒÆ¶¯£¬»æÖÆ³ö°×É«ÏßÌõ
+	//é¼ æ ‡å·¦é”®æŒ‰ä¸‹å¹¶ç§»åŠ¨ï¼Œç»˜åˆ¶å‡ºç™½è‰²çº¿æ¡
 	else if( event == EVENT_MOUSEMOVE && (flags & EVENT_FLAG_LBUTTON) )
 	{
 		Point pt(x, y);
@@ -176,22 +176,22 @@ static void on_Mouse( int event, int x, int y, int flags, void* )
 }
 
 
-//-----------------------------------¡¾ShowHelpText( )º¯Êý¡¿----------------------------------  
-//      ÃèÊö£ºÊä³öÒ»Ð©°ïÖúÐÅÏ¢  
+//-----------------------------------ã€ShowHelpText( )å‡½æ•°ã€‘----------------------------------  
+//      æè¿°ï¼šè¾“å‡ºä¸€äº›å¸®åŠ©ä¿¡æ¯  
 //----------------------------------------------------------------------------------------------  
 static void ShowHelpText()  
 {  
-	//Êä³ö»¶Ó­ÐÅÏ¢ºÍOpenCV°æ±¾
-	printf("\n\n\t\t\t·Ç³£¸ÐÐ»¹ºÂò¡¶OpenCV3±à³ÌÈëÃÅ¡·Ò»Êé£¡\n");
-	printf("\n\n\t\t\t´ËÎª±¾ÊéOpenCV3°æµÄµÚ77¸öÅäÌ×Ê¾Àý³ÌÐò\n");
-	printf("\n\n\t\t\t   µ±Ç°Ê¹ÓÃµÄOpenCV°æ±¾Îª£º" CV_VERSION );
+	//è¾“å‡ºæ¬¢è¿Žä¿¡æ¯å’ŒOpenCVç‰ˆæœ¬
+	printf("\n\n\t\t\téžå¸¸æ„Ÿè°¢è´­ä¹°ã€ŠOpenCV3ç¼–ç¨‹å…¥é—¨ã€‹ä¸€ä¹¦ï¼\n");
+	printf("\n\n\t\t\tæ­¤ä¸ºæœ¬ä¹¦OpenCV3ç‰ˆçš„ç¬¬77ä¸ªé…å¥—ç¤ºä¾‹ç¨‹åº\n");
+	printf("\n\n\t\t\t   å½“å‰ä½¿ç”¨çš„OpenCVç‰ˆæœ¬ä¸ºï¼š" CV_VERSION );
 	printf("\n\n  ----------------------------------------------------------------------------\n");
 
-	//Êä³öÒ»Ð©°ïÖúÐÅÏ¢  
-	printf(  "\n\n\n\t»¶Ó­À´µ½¡¾·ÖË®ÁëËã·¨¡¿Ê¾Àý³ÌÐò~\n\n");  
-	printf(  "\tÇëÏÈÓÃÊó±êÔÚÍ¼Æ¬´°¿ÚÖÐ±ê¼Ç³ö´óÖÂµÄÇøÓò£¬\n\n\tÈ»ºóÔÙ°´¼ü¡¾1¡¿»òÕß¡¾SPACE¡¿Æô¶¯Ëã·¨¡£"
-		"\n\n\t°´¼ü²Ù×÷ËµÃ÷: \n\n"  
-		"\t\t¼üÅÌ°´¼ü¡¾1¡¿»òÕß¡¾SPACE¡¿- ÔËÐÐµÄ·ÖË®Áë·Ö¸îËã·¨\n"  
-		"\t\t¼üÅÌ°´¼ü¡¾2¡¿- »Ö¸´Ô­Ê¼Í¼Æ¬\n"  
-		"\t\t¼üÅÌ°´¼ü¡¾ESC¡¿- ÍË³ö³ÌÐò\n\n\n");  
+	//è¾“å‡ºä¸€äº›å¸®åŠ©ä¿¡æ¯  
+	printf(  "\n\n\n\tæ¬¢è¿Žæ¥åˆ°ã€åˆ†æ°´å²­ç®—æ³•ã€‘ç¤ºä¾‹ç¨‹åº~\n\n");  
+	printf(  "\tè¯·å…ˆç”¨é¼ æ ‡åœ¨å›¾ç‰‡çª—å£ä¸­æ ‡è®°å‡ºå¤§è‡´çš„åŒºåŸŸï¼Œ\n\n\tç„¶åŽå†æŒ‰é”®ã€1ã€‘æˆ–è€…ã€SPACEã€‘å¯åŠ¨ç®—æ³•ã€‚"
+		"\n\n\tæŒ‰é”®æ“ä½œè¯´æ˜Ž: \n\n"  
+		"\t\té”®ç›˜æŒ‰é”®ã€1ã€‘æˆ–è€…ã€SPACEã€‘- è¿è¡Œçš„åˆ†æ°´å²­åˆ†å‰²ç®—æ³•\n"  
+		"\t\té”®ç›˜æŒ‰é”®ã€2ã€‘- æ¢å¤åŽŸå§‹å›¾ç‰‡\n"  
+		"\t\té”®ç›˜æŒ‰é”®ã€ESCã€‘- é€€å‡ºç¨‹åº\n\n\n");  
 }  
