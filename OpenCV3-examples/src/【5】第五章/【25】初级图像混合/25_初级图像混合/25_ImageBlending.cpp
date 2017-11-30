@@ -25,6 +25,7 @@ using namespace std;
 bool  ROI_AddImage();
 bool  LinearBlending();
 bool  ROI_LinearBlending();
+bool  ROI_Animation();
 void   ShowHelpText();
 
 //-----------------------------------【main( )函数】--------------------------------------------
@@ -40,6 +41,7 @@ int main(   )
 	{
 		cout<<endl<<"\n运行成功，得出了需要的图像";
 	}
+	ROI_Animation();
 
 	waitKey(0);
 	return 0;
@@ -144,6 +146,8 @@ bool  ROI_LinearBlending()
 	//imageROI= srcImage4(Range(250,250+logoImage.rows),Range(200,200+logoImage.cols));
 
 	//【3】将logo加到原图上
+	// 从下面2句可以看出： 做线性叠加的区域是 imageROI和logoImage，但 srcImage4 也随之变化，说明 imageROI 指向的就是 srcImage 中的一部分。
+	// 所以这种叠加方式也是不可逆的
 	addWeighted(imageROI,0.5,logoImage,0.3,0.,imageROI);
 
 	//【4】显示结果
@@ -152,3 +156,35 @@ bool  ROI_LinearBlending()
 	return true;
 }
 
+
+// 做个动画，需要可逆操作，所以把原图拷贝到tempROI中，然后再拷贝回去。
+bool  ROI_Animation()
+{
+	//【1】读取图像
+	Mat srcImage4= imread("dota_pa.jpg",1);
+	Mat logoImage= imread("dota_logo.jpg");
+
+	if( !srcImage4.data ) { printf("读取srcImage4错误~！ \n"); return false; }
+	if( !logoImage.data ) { printf("读取logoImage错误~！ \n"); return false; }
+
+	//【2】定义一个Mat类型并给其设定ROI区域
+	Mat imageROI;
+	Mat tempROI;
+	Mat mask= imread("dota_logo.jpg",0);
+	
+	imageROI= srcImage4(Rect(200,250,logoImage.cols,logoImage.rows));
+	imageROI.copyTo(tempROI);
+	
+	for(int i = 0;i < 200;i++)
+	{
+		tempROI.copyTo(imageROI);
+		imageROI= srcImage4(Rect(200+i,250,logoImage.cols,logoImage.rows));
+		imageROI.copyTo(tempROI);
+		logoImage.copyTo(imageROI,mask);
+		//addWeighted(imageROI,0.5,logoImage,0.3,0.,imageROI);
+		imshow("<5>区域线性图像混合移动示例窗口",srcImage4);
+		waitKey(30);  //延时30ms
+	}
+	
+	return true;
+}

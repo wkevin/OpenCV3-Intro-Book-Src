@@ -48,7 +48,7 @@ int main(  )
 			map_y.at<float>(j,i) = static_cast<float>(srcImage.rows - j);
 		} 
 	}
-
+	
 	//【4】进行重映射操作
 	//此句代码的OpenCV2版为：
 	//remap( srcImage, dstImage, map_x, map_y, CV_INTER_LINEAR, BORDER_CONSTANT, Scalar(0,0, 0) );

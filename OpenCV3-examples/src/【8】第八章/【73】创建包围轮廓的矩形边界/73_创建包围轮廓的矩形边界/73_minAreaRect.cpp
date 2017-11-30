@@ -70,7 +70,8 @@ int main(  )
 		}
 
 		//对给定的 2D 点集，寻找最小面积的包围矩形
-		RotatedRect box = minAreaRect(Mat(points));
+		//RotatedRect box = minAreaRect(Mat(points));
+		RotatedRect box = fitEllipse(Mat(points));
 		Point2f vertex[4];
 		box.points(vertex);
 

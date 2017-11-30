@@ -100,12 +100,14 @@ int main( int argc, char** argv )
 
 			//循环绘制出轮廓
 			for( int index = 0; index >= 0; index = hierarchy[index][0], compCount++ )
+			{
 				drawContours(maskImage, contours, index, Scalar::all(compCount+1), -1, 8, hierarchy, INT_MAX);
+			}
 
 			//compCount为零时的处理
 			if( compCount == 0 )
 				continue;
-
+						
 			//生成随机颜色
 			vector<Vec3b> colorTab;
 			for( i = 0; i < compCount; i++ )
@@ -138,8 +140,8 @@ int main( int argc, char** argv )
 				}
 
 				//混合灰度图和分水岭效果图并显示最终的窗口
-				watershedImage = watershedImage*0.5 + grayImage*0.5;
-				imshow( WINDOW_NAME2, watershedImage );
+				//watershedImage = watershedImage*0.5 + grayImage*0.5;
+				imshow( WINDOW_NAME2, watershedImage ); 
 		}
 	}
 
@@ -172,6 +174,7 @@ static void on_Mouse( int event, int x, int y, int flags, void* )
 		line( g_srcImage, prevPt, pt, Scalar::all(255), 5, 8, 0 );
 		prevPt = pt;
 		imshow(WINDOW_NAME1, g_srcImage);
+		imshow("aa", g_maskImage);
 	}
 }
 

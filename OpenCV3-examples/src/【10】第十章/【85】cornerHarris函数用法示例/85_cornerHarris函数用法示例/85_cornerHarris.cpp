@@ -22,11 +22,21 @@ int main()
 	//以灰度模式载入图像并显示
 	Mat srcImage = imread("1.jpg", 0);  
 	imshow("原始图", srcImage);  
-
+	printf("srcImage: %d,%d\n",srcImage.channels(),srcImage.depth());
+	
 	//进行Harris角点检测找出角点
 	Mat cornerStrength;  
 	cornerHarris(srcImage, cornerStrength, 2, 3, 0.01);
+	imshow("角点检测后效果图", cornerStrength);  
+	printf("cornerStrength: %d,%d\n",cornerStrength.channels(),cornerStrength.depth());
 
+	Mat_<float>::iterator it=cornerStrength.begin<float>();
+	Mat_<float>::iterator itend=cornerStrength.end<float>();
+	for( ;it<itend;it++)
+	{
+		printf("%f ", *it);
+	}
+	
 	//对灰度图进行阈值操作，得到二值图并显示  
 	Mat harrisCorner;  
 	threshold(cornerStrength, harrisCorner, 0.00001, 255, THRESH_BINARY);  

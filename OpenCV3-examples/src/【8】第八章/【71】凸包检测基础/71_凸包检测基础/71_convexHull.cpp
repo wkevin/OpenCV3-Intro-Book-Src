@@ -75,14 +75,15 @@ int main( )
 		//检测凸包
 		vector<int> hull;
 		convexHull(Mat(points), hull, true);
-
-		//绘制出随机颜色的点
+		
+		//绘制出随机颜色的点--其实是在该点上画一个半径为3像素的圆
 		image = Scalar::all(0);
 		for(int i = 0; i < count; i++ )
-			circle(image, points[i], 3, Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255)), FILLED, LINE_AA);
-
+		circle(image, points[i], 3, Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255)), FILLED, LINE_AA);
+		
 		//准备参数
 		int hullcount = (int)hull.size();//凸包的边数
+		printf("hull size: %d\n", hullcount);
 		Point point0 = points[hull[hullcount-1]];//连接凸包边的坐标点
 
 		//绘制凸包的边

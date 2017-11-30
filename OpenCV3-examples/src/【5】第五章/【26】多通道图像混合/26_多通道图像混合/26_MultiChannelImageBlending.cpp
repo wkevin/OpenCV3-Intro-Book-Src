@@ -167,6 +167,37 @@ bool  MultiChannelBlending()
 	namedWindow("<3>游戏原画+logo红色通道 ");
 	imshow("<3>游戏原画+logo红色通道 ",srcImage);
 
+		
+	//=================【通道独立显示和分别叠加】=================
+	//	描述：多通道混合-红色分量部分
+	//============================================
+
+	Mat tarImage;
+	logoImage= imread("dota_logo.jpg",0);
+	srcImage= imread("dota_jugg.jpg");
+	split(srcImage,channels);
+	
+	// 下面的3种显示将不会出现 蓝、绿、红的图像，而都是黑白的，因为单通道的Mat将被理解为灰度值。
+	imshow("blue", channels[0]);
+	imshow("green", channels[1]);
+	imshow("red", channels[2]);
+	
+
+	channels[1].copyTo(channels[0]);
+	merge(channels,tarImage);
+	imshow("GGR",tarImage);
+
+	split(srcImage,channels);
+	channels[2].copyTo(channels[1]);
+	merge(channels,tarImage);
+	imshow("BRR",tarImage);
+	
+	split(srcImage,channels);
+	channels[2].copyTo(channels[0]);
+	channels[2].copyTo(channels[1]);
+	merge(channels,tarImage);
+	imshow("RRR",tarImage);
+	
 	return true;
 }
 

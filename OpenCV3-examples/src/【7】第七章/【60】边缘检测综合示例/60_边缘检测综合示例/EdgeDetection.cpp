@@ -28,6 +28,7 @@ Mat g_srcImage, g_srcGrayImage,g_dstImage;
 //Canny边缘检测相关变量
 Mat g_cannyDetectedEdges;
 int g_cannyLowThreshold=1;//TrackBar位置参数  
+int g_blurSize = 3;
 
 //Sobel边缘检测相关变量
 Mat g_sobelGradient_X, g_sobelGradient_Y;
@@ -78,7 +79,8 @@ int main( int argc, char** argv )
 	namedWindow( "【效果图】Sobel边缘检测", WINDOW_AUTOSIZE );
 
 	// 创建trackbar
-	createTrackbar( "参数值：", "【效果图】Canny边缘检测", &g_cannyLowThreshold, 120, on_Canny );
+	createTrackbar( "参数值blurSize：", "【效果图】Canny边缘检测", &g_blurSize, 100, on_Canny );
+	createTrackbar( "参数值Threshold：", "【效果图】Canny边缘检测", &g_cannyLowThreshold, 120, on_Canny );
 	createTrackbar( "参数值：", "【效果图】Sobel边缘检测", &g_sobelKernelSize, 3, on_Sobel );
 
 	// 调用回调函数
@@ -117,8 +119,9 @@ static void ShowHelpText()
 //-----------------------------------------------------------------------------------------------
 void on_Canny(int, void*)
 {
+	if (g_blurSize == 0) return;
 	// 先使用 3x3内核来降噪
-	blur( g_srcGrayImage, g_cannyDetectedEdges, Size(3,3) );
+	blur( g_srcGrayImage, g_cannyDetectedEdges, Size(g_blurSize, g_blurSize) );
 
 	// 运行我们的Canny算子
 	Canny( g_cannyDetectedEdges, g_cannyDetectedEdges, g_cannyLowThreshold, g_cannyLowThreshold*3, 3 );

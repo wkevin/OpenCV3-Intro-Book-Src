@@ -17,6 +17,8 @@
 #include "opencv2/highgui/highgui.hpp"
 #include <iostream>
 using namespace cv;
+using std::cout;
+using std::endl;
 
 
 //-----------------------------------【ShowHelpText( )函数】----------------------------------
@@ -38,11 +40,19 @@ void ShowHelpText()
 //-------------------------------------------------------------------------------------------------
 int main( )
 {
-
 	//【1】以灰度模式读取原始图像并显示
-	Mat srcImage = imread("1.jpg", 0);
+	Mat srcImage = imread("1.jpg", IMREAD_GRAYSCALE);
 	if(!srcImage.data ) { printf("读取图片错误，请确定目录下是否有imread函数指定图片存在~！ \n"); return false; } 
 	imshow("原始图像" , srcImage);   
+
+	// Mat_<T> newImage(srcImage) 创建的新 Mat，如果T和srcImage类型相同，则newImage和srcImage共用矩阵，如果T类型不同，newImage新建矩阵，不再是指针级共享
+	/*
+	Mat_<uchar> tempImage(srcImage);
+	imshow("create tempImage", tempImage);
+	tempImage = Mat::zeros(tempImage.rows,tempImage.cols, CV_8U);
+	imshow("srcImage after modify tempImage",srcImage);
+	imshow("tempImage after modify tempImage",tempImage);
+	*/
 
 	ShowHelpText();
 
@@ -56,11 +66,23 @@ int main( )
 	//【3】为傅立叶变换的结果(实部和虚部)分配存储空间。
 	//将planes数组组合合并成一个多通道的数组complexI
 	Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
+	Mat planes1[] = {Mat::zeros(padded.size(), CV_32F), Mat::zeros(padded.size(), CV_32F)};
 	Mat complexI;
-	merge(planes, 2, complexI);         
-
+	Mat complexI1;
+	merge(planes, 2, complexI); 
+	merge(planes1, 2, complexI1);
+	
+	// 理解channel和depth：
+	// channel:2 -- 双通道
+	// depth: 5  -- CV_32F，通道内的每个值是 CV_32F（32bit，float）类型
+	printf("channels: %d; depth: %d \n", complexI.channels(), complexI.depth());
+	
 	//【4】进行就地离散傅里叶变换
-	dft(complexI, complexI);           
+	dft(complexI, complexI);   
+	// 使用新Mat做变换
+	dft(Mat_<float>(padded), complexI1);    
+	
+	complexI1.copyTo(complexI);
 
 	//【5】将复数转换为幅值，即=> log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
 	split(complexI, planes); // 将多通道数组complexI分离成几个单通道数组，planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))

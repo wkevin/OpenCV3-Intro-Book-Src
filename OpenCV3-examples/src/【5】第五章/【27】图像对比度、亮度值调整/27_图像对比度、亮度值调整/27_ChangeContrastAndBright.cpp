@@ -70,6 +70,10 @@ int main(   )
 	//输出一些帮助信息
 	cout<<endl<<"\t运行成功，请调整滚动条观察图像效果\n\n"
 		<<"\t按下“q”键时，程序退出\n";
+		
+	// 创建窗口
+	namedWindow("【原始图窗口】", 1);
+	imshow("【原始图窗口】", g_srcImage);
 
 	//按下“q”键时，程序退出
 	while(char(waitKey(1)) != 'q') {}
@@ -98,9 +102,6 @@ void ShowHelpText()
 static void ContrastAndBright(int, void *)
 {
 
-	// 创建窗口
-	namedWindow("【原始图窗口】", 1);
-
 	// 三个for循环，执行运算 g_dstImage(i,j) = a*g_srcImage(i,j) + b
 	for( int y = 0; y < g_srcImage.rows; y++ )
 	{
@@ -114,7 +115,6 @@ static void ContrastAndBright(int, void *)
 	}
 
 	// 显示图像
-	imshow("【原始图窗口】", g_srcImage);
 	imshow("【效果图窗口】", g_dstImage);
 }
 

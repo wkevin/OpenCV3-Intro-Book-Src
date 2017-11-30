@@ -25,6 +25,13 @@ int main( )
 	//【1】读入视频
 	VideoCapture capture("1.avi");
 
+	// 报错：Unable to stop the stream: Inapproriate ioctl for device
+	// 解决：
+	// sudo apt-get install libv4l-dev
+    // sudo apt-get install ffmpeg
+    // sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev
+	// cmake -DWITH_V4L=ON -DWITH_LIBV4L=ON -DWITH_FFMPEG=ON
+	
 	//【2】循环显示每一帧
 	while(1)  
 	{  

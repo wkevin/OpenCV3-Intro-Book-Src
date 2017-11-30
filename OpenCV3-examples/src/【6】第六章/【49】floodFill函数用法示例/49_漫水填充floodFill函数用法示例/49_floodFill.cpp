@@ -26,8 +26,9 @@ int main( )
 {    
 	Mat src = imread("1.jpg"); 
 	imshow("【原始图】",src);
+	printf("width: %d; height: %d \n", src.cols, src.rows);
 	Rect ccomp;
-	floodFill(src, Point(50,300), Scalar(155, 255,55), &ccomp, Scalar(20, 20, 20),Scalar(20, 20, 20));
+	floodFill(src, Point(500,30), Scalar(155, 255,55), &ccomp, Scalar(20, 20, 20),Scalar(120, 120, 120));
 	imshow("【效果图】",src);
 	waitKey(0);
 	return 0;    

@@ -99,6 +99,7 @@ void on_ThreshChange(int, void* )
 	}
 
 	// 显示效果图
+	imshow( "g_cannyMat_output", g_cannyMat_output );
 	imshow( WINDOW_NAME2, drawing );
 }
 

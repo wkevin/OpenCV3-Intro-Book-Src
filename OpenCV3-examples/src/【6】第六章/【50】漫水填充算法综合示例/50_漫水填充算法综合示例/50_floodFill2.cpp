@@ -174,16 +174,15 @@ int main( int argc, char** argv )
 			{
 				cout << "键盘“1”被按下，切换彩色/灰度模式，当前操作为将【彩色模式】切换为【灰度模式】\n";
 				cvtColor(g_srcImage, g_grayImage, COLOR_BGR2GRAY);
-				g_maskImage = Scalar::all(0);	//将mask所有元素设置为0
 				g_bIsColor = false;	//将标识符置为false，表示当前图像不为彩色，而是灰度
 			}
 			else//若原来为灰度图，便将原来的彩图image0再次拷贝给image，并且将掩膜mask所有元素设置为0
 			{
 				cout << "键盘“1”被按下，切换彩色/灰度模式，当前操作为将【彩色模式】切换为【灰度模式】\n";
 				g_srcImage.copyTo(g_dstImage);
-				g_maskImage = Scalar::all(0);
 				g_bIsColor = true;//将标识符置为true，表示当前图像模式为彩色
 			}
+			g_maskImage = Scalar::all(255);	//将mask所有元素设置为0
 			break;
 			//如果键盘按键“2”被按下，显示/隐藏掩膜窗口
 		case '2':
@@ -195,7 +194,7 @@ int main( int argc, char** argv )
 			else
 			{
 				namedWindow( "mask", 0 );
-				g_maskImage = Scalar::all(0);
+				g_maskImage = Scalar::all(255);
 				imshow("mask", g_maskImage);
 				g_bUseMask = true;
 			}

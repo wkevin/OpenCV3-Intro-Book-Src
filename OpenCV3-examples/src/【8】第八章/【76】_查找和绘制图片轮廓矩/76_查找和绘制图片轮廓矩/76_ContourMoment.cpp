@@ -68,7 +68,8 @@ int main( int argc, char** argv )
 	//创建滚动条并进行初始化
 	createTrackbar( " 阈值", WINDOW_NAME1, &g_nThresh, g_nMaxThresh, on_ThreshChange );
 	on_ThreshChange( 0, 0 );
-
+	namedWindow( WINDOW_NAME2, WINDOW_AUTOSIZE );
+	
 	waitKey(0);
 	return(0);
 }
@@ -96,16 +97,12 @@ void on_ThreshChange(int, void* )
 
 	// 绘制轮廓
 	Mat drawing = Mat::zeros( g_cannyMat_output.size(), CV_8UC3 );
-	for( unsigned int i = 0; i< g_vContours.size(); i++ )
-	{
-		Scalar color = Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
-		drawContours( drawing, g_vContours, i, color, 2, 8, g_vHierarchy, 0, Point() );//绘制外层和内层轮廓
-		circle( drawing, mc[i], 4, color, -1, 8, 0 );;//绘制圆
-	}
-
-	// 显示到窗口中
-	namedWindow( WINDOW_NAME2, WINDOW_AUTOSIZE );
-	imshow( WINDOW_NAME2, drawing );
+	// for( unsigned int i = 0; i< g_vContours.size(); i++ )
+	// {
+	// 	Scalar color = Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+	// 	drawContours( drawing, g_vContours, i, color, 2, 8, g_vHierarchy, 0, Point() );//绘制外层和内层轮廓
+	// 	circle( drawing, mc[i], 4, color, -1, 8, 0 );;//绘制圆
+	// }
 
 	// 通过m00计算轮廓面积并且和OpenCV函数比较
 	printf("\t 输出内容: 面积和轮廓长度\n");
@@ -116,6 +113,9 @@ void on_ThreshChange(int, void* )
 		drawContours( drawing, g_vContours, i, color, 2, 8, g_vHierarchy, 0, Point() );
 		circle( drawing, mc[i], 4, color, -1, 8, 0 );
 	}
+	
+	// 显示到窗口中
+	imshow( WINDOW_NAME2, drawing );
 }
 
 

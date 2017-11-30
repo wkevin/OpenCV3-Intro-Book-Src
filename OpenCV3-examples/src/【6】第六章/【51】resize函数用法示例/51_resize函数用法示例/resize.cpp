@@ -31,8 +31,8 @@ int main( )
 	imshow("【原始图】", srcImage);  
 
 	//进行尺寸调整操作
-	resize(tmpImage,dstImage1,Size( tmpImage.cols/2, tmpImage.rows/2 ),(0,0),(0,0),3);
-	resize(tmpImage,dstImage2,Size( tmpImage.cols*2, tmpImage.rows*2 ),(0,0),(0,0),3);
+	resize(tmpImage,dstImage1,Size( tmpImage.cols/3, tmpImage.rows/2 ),(0,0),(0,0),3);
+	resize(tmpImage,dstImage2,Size( tmpImage.cols*3, tmpImage.rows*2 ),(0,0),(0,0),3);
 
 	//显示效果图  
 	imshow("【效果图】之一", dstImage1);  
